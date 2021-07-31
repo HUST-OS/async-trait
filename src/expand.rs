@@ -282,7 +282,7 @@ fn transform_sig(
     let bounds = if is_local {
         quote_spanned!(ret_span=> 'async_trait)
     } else {
-        quote_spanned!(ret_span=> ::core::marker::Send + 'async_trait)
+        quote_spanned!(ret_span=> ::core::marker::Send + core::marker::Sync + 'async_trait)
     };
     sig.output = parse_quote_spanned! {ret_span=>
         -> ::core::pin::Pin<Box<
